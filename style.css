@@ -5,10 +5,15 @@
     margin: 0;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 body{
     margin: 0;
     padding: 0;
     background-color: #E3E7EB ;
+    scroll-behavior: smooth;
 }
 
 section{
@@ -182,14 +187,21 @@ form button{
     border: none;
     border-radius: 16px;
 
-    color: white;
-    background-color: #111727;
-
     cursor: pointer;
     font-weight: bold;
 
     margin-top: 32px;
     padding: 8px 32px;
+}
+
+#submit-btn{
+    color: white;
+    background-color: #111727;
+}
+
+#cancel-btn{
+    color: white;
+    background-color: red;
 }
 
 
@@ -253,7 +265,7 @@ form button{
 
 .project-des{
     font-size: 14px;
-    
+    word-break: break-all;
 }
 
 .project-logos{

@@ -4,8 +4,8 @@ const submitBtn = document.getElementById("submit-btn");
 submitBtn.addEventListener("click", checkForm);
 
 
-// CREATE FUNCTION
-function checkForm(e){
+// PRE SUBMIT
+function checkForm(e,isEditing=false,editingProject=null){
     e.preventDefault();
 
     const project = {
@@ -34,20 +34,20 @@ function checkForm(e){
 
 
     // Submit
-    submitForm(project)
-
+    if(!isEditing)  submitForm(project) 
+    if(isEditing) updateForm(project,editingProject)
 
 }
 
+// CREATE FUNCTION
 function submitForm(project){
     const projectList = document.getElementById("project-list");
-    const newProject = document.createElement("a");
+    const newProject = document.createElement("div");
     newProject.classList.add("project");
-    newProject.href = "./single.html";
 
     newProject.innerHTML = `
           
-    <img src=${project.image} width="100%" alt="">
+    <img class="project-img" src=${project.image} width="100%" alt="">
     <span class="project-title">${project.name}</span>
     <p class="project-duration">durasi: ${getTime(project.start,project.end)}</p>
     <p class="project-des">${project.desc}</p>
@@ -55,8 +55,8 @@ function submitForm(project){
     <div class="project-logos">
        ${project.techs[0] ? `<i class="fa-brands fa-node-js"></i>` : ""}
        ${project.techs[2] ? `<i class="fa-brands fa-react"></i>` : ""}
-       ${project.techs[1] ? `<img src="./assets/nextjs.webp" width="40px">` : ""}
-       ${project.techs[3] ? ` <img src="./assets/typescript_original_logo_icon_146317.png" width="24px" >` : ""}
+       ${project.techs[1] ? `<img class="next-js" src="./assets/nextjs.webp" width="40px">` : ""}
+       ${project.techs[3] ? ` <img  class="ts" src="./assets/typescript_original_logo_icon_146317.png" width="24px" >` : ""}
     </div>
      
     <div class="project-buttons">
@@ -69,12 +69,13 @@ function submitForm(project){
 
     // ADD LISTENERS
 
-    newProject.addEventListener("click", ()=>{
-        location.href = "http://localhost:5500/Chapter1-day4/single.html";
-    })
+    newProject.addEventListener("click", movePost)
 
     const deleteBtn = newProject.querySelector(".delete-btn");
     deleteBtn.addEventListener("click", deletePost);
+
+    const editBtn = newProject.querySelector(".edit-btn");
+    editBtn.addEventListener("click", editPost)
    
     // Delete "no posts, please ..." kalo ada
     isPostEmpty();
@@ -82,23 +83,88 @@ function submitForm(project){
     // Clear input
     clearInputs();
     
+    alert("New project created")
 }
 
 // DELETE FUNCTION
 function deletePost(e){
        e.stopPropagation();
-       e.stop
-
        const project = e.currentTarget.parentElement.parentElement;
+       
+      //project.removeEventListener("click",movePost) 
        project.remove()
 
-      console.log("Executed");
-      console.log(e)
       // Add "no posts, please ..." kalo posts kosong
       isPostEmpty();
+      alert("Project deleted")
+
 }
 
+// EDIT FUNCTION
+function editPost(e){
+    e.stopPropagation();
 
+    const project = e.currentTarget.parentElement.parentElement;
+
+
+    // submitForm(e,true);
+    window.scrollTo({
+        left: 0,
+        top:0
+    })
+
+
+    // Fill the form above sesuai yg diisi sblmnya
+    getId("project-input").value = project.querySelector(".project-title").innerHTML;
+    getId("description-input").value = project.querySelector(".project-des").innerHTML;
+    getId("node").checked = project.querySelector(".fa-brands.fa-node-js") ? true : false;
+    getId("next").checked = project.querySelector(".next-js") ? true : false;
+    getId("react").checked = project.querySelector("fa-brands.fa-react") ? true : false;
+    getId("ts").checked = project.querySelector(".ts") ? true : false;
+
+    // Add Cancel Button
+    const cancelBtn = document.createElement("button");
+    cancelBtn.innerHTML = "Cancel ";
+    cancelBtn.id = "cancel-btn";
+
+    submitBtn.parentElement.appendChild(cancelBtn);
+
+    cancelBtn.addEventListener("click",cancelEdit)
+
+    // Submit / Update
+    submitBtn.removeEventListener("click", checkForm);
+    submitBtn.innerHTML = "Update";
+    submitBtn.addEventListener("click", (event)=>{checkForm(event,true,project)})
+}
+
+function cancelEdit(e){
+       
+
+       e.currentTarget.remove();
+       clearInputs();
+       alert("Editting canceled")
+       
+}
+
+function updateForm(newProjectData,oldProject){
+    oldProject.querySelector(".project-img").src = newProjectData.image;
+    oldProject.querySelector(".project-title").innerHTML = newProjectData.name;
+    oldProject.querySelector(".project-duration").innerHTML = "durasi: " + getTime(newProjectData.start,newProjectData.end);
+    oldProject.querySelector(".project-des").innerHTML = newProjectData.desc;
+   !newProjectData.techs[0] && oldProject.querySelector(".fa-brands.fa-node-js").remove();
+   !newProjectData.techs[1] && oldProject.querySelector(".fa-brands.fa-react").remove();
+   !newProjectData.techs[2] && oldProject.querySelector(".next-js").remove();
+   !newProjectData.techs[3] && oldProject.querySelector(".ts").remove();
+
+   alert("Old project updated");
+
+   submitBtn.replaceWith(submitBtn.cloneNode(true));
+   submitBtn.addEventListener("click", checkForm);
+   submitBtn.innerHTML = "submit";
+
+//    clear
+   clearInputs()
+}
 
 
 
@@ -108,16 +174,27 @@ function getId (id){
 }
 
 function getTime(start,end){
+    
+
+    // year
+    const startYear = Number(start.slice(0,4));
+    const endYear = Number(end.slice(0,4));
+    const yearDuration = (endYear - startYear) !== 0 ? (endYear - startYear) * 12 : 0;
+    
+    // month
     if(start[5] == 0){start = start[6]}else{start = start[5]+start[6]}
     if(end[5] == 0){end = end[6]}else{end = end[5] + end[6]};
+
+
     const startMonth = Number(start);
     const endMonth = Number(end);
 
-    const duration = endMonth - startMonth;
+
+    // Kalkulasi => selisih bulan + selisih tahun = durasi selisih total
+    const duration = endMonth - startMonth + yearDuration;
     
     if(duration === 0) return "Dibawah sebulan"
-
-    return endMonth - startMonth + " " + "bulan"
+    return duration + " " + "bulan"
 }
 
 function isPostEmpty(){
@@ -139,10 +216,14 @@ function clearInputs(){
      getId("start-date-input").value = "";
      getId("end-date-input").value = "";
      getId("description-input").value = "";
-     getId("node").checked = "";
-     getId("next").checked = "";
-     getId("react").checked = "";
-     getId("ts").checked = "";
-    //  getId("file-input").files = "";
+     getId("node").checked = false;
+     getId("next").checked = false;
+     getId("react").checked = false;
+     getId("ts").checked = false;
+    
+}
+
+function movePost(){
+    location.href = "http://localhost:5500/Chapter1-day4/single.html";
 }
 
