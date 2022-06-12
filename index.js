@@ -20,7 +20,7 @@ function checkForm(e,isEditing=false,editingProject=null){
         getId("next").checked, 
         getId("react").checked, 
         getId("ts").checked],
-        image: URL.createObjectURL(getId("file-input").files[0])
+        image: getId("file-input").value ? URL.createObjectURL(getId("file-input").files[0]) : null
     };
 
     // Filter
@@ -28,7 +28,7 @@ function checkForm(e,isEditing=false,editingProject=null){
     if(!project.start || !project.end){return alert("Date can't be empty.")}
     if(!project.desc){ return alert("Descriptions can't be empty.")}
     if(project.techs.every(item => item === false)){return alert("Please choose at least one technology")}
-    // if(!project.image) return alert("Image can't be empty")
+    if(!project.image) return alert("Image can't be empty")
 
     // Submit
     if(!isEditing)  submitForm(project) 
@@ -223,6 +223,7 @@ function clearInputs(){
      getId("start-date-input").value = "";
      getId("end-date-input").value = "";
      getId("description-input").value = "";
+     getId("file-input").value = "";
      getId("node").checked = false;
      getId("next").checked = false;
      getId("react").checked = false;
