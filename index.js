@@ -4,6 +4,9 @@ const submitBtn = document.getElementById("submit-btn");
 submitBtn.addEventListener("click", checkForm);
 
 
+                                   // MAIN CRUD FUNCTIONS
+
+
 // PRE SUBMIT
 function checkForm(e,isEditing=false,editingProject=null){
     e.preventDefault();
@@ -26,6 +29,7 @@ function checkForm(e,isEditing=false,editingProject=null){
     // Filter
     if(!project.name){ return alert("Name can't be empty.")}
     if(!project.start || !project.end){return alert("Date can't be empty.")}
+    if(!validateDate(project.start, project.end)){return alert("End Date must be more recent than start date")}
     if(!project.desc){ return alert("Descriptions can't be empty.")}
     if(project.techs.every(item => item === false)){return alert("Please choose at least one technology")}
     if(!project.image) return alert("Image can't be empty")
@@ -47,7 +51,7 @@ function submitForm(project){
     <div class="upper-project">
         <img class="project-img" src=${project.image} width="100%" alt="">
         <span class="project-title">${project.name}</span>
-        <p class="project-duration">durasi: ${getTime(project.start,project.end)}</p>
+        <p class="project-duration">Durasi: ${getTime(project.start,project.end)}</p>
         <p class="project-des">${project.desc}</p>
     </div>
 
@@ -74,8 +78,8 @@ function submitForm(project){
     const deleteBtn = newProject.querySelector(".delete-btn");
     deleteBtn.addEventListener("click", deletePost);
 
-    // const editBtn = newProject.querySelector(".edit-btn");
-    // editBtn.addEventListener("click", editPost)
+    const editBtn = newProject.querySelector(".edit-btn");
+    editBtn.addEventListener("click", editPost)
    
     // Delete "no posts, please ..." kalo ada
     isPostEmpty();
@@ -98,84 +102,127 @@ function deletePost(e){
 }
 
 // EDIT FUNCTION
-// function editPost(e){
-//     e.stopPropagation();
-//     const project = e.currentTarget.parentElement.parentElement.parentElement;
+             // when click edit button
+function editPost(e){
+    e.stopPropagation();
+    const project = e.currentTarget.parentElement.parentElement.parentElement;
+    
+    window.scrollTo({
+        left: 0,
+        top:0
+    })
 
-//     window.scrollTo({
-//         left: 0,
-//         top:0
-//     })
+    // Fill the form above sesuai yg diisi sblmnya
+    getId("project-input").value = project.querySelector(".project-title").innerHTML;
+    getId("description-input").value = project.querySelector(".project-des").innerHTML;
+    getId("node").checked = project.querySelector(".fa-brands.fa-node-js") ? true : false;
+    getId("next").checked = project.querySelector(".next-js") ? true : false;
+    getId("react").checked = project.querySelector(".fa-brands.fa-react") ? true : false;
+    getId("ts").checked = project.querySelector(".ts") ? true : false;
 
-//     // Fill the form above sesuai yg diisi sblmnya
-//     getId("project-input").value = project.querySelector(".project-title").innerHTML;
-//     getId("description-input").value = project.querySelector(".project-des").innerHTML;
-//     getId("node").checked = project.querySelector(".fa-brands.fa-node-js") ? true : false;
-//     getId("next").checked = project.querySelector(".next-js") ? true : false;
-//     getId("react").checked = project.querySelector(".fa-brands.fa-react") ? true : false;
-//     getId("ts").checked = project.querySelector(".ts") ? true : false;
-
-//     // Add Cancel Button
-//     const cancelBtn = document.createElement("button");
-//     cancelBtn.innerHTML = "Cancel ";
-//     cancelBtn.id = "cancel-btn";
-//     submitBtn.parentElement.appendChild(cancelBtn);
-//     cancelBtn.addEventListener("click",cancelEdit) 
-
-//     // if they click other edit button while in editing state , warn them
-//     const editBtns = document.querySelectorAll(".edit-btn");
-//     editBtns.forEach((btn)=>{ // take all edit buttons power, bcs in editing mode
-//         btn.removeEventListener("click",editPost);
-//         btn.addEventListener("click", warnEdit) });
+    // Add Cancel Button
+    const cancelBtn = document.createElement("button");
+    cancelBtn.innerHTML = "Cancel ";
+    cancelBtn.id = "cancel-btn";
+    const buttonGroup = document.querySelector(".form-btns");
+    buttonGroup.appendChild(cancelBtn);
     
 
-//     // Submit / Update
-//     submitBtn.removeEventListener("click", checkForm);
-//     submitBtn.innerHTML = "Update";
-//     submitBtn.addEventListener("click", (event)=>{checkForm(event,true,project)})
-// }
 
-// function cancelEdit(e){
-//     submitBtn.innerHTML = "Submit";
-       
-//        e.currentTarget.remove();
-//        clearInputs();
-//        alert("Editting canceled")
+    // Add Update Button and Remove Submit button
+     const updateBtn = document.createElement("button");
+     updateBtn.innerHTML = "Update";
+     updateBtn.id = "update-btn";
 
-//     //    Give all edit buttons back their power
-//     const editBtns = document.querySelectorAll(".edit-btn");
-//     editBtns.forEach((btn)=>{ btn.addEventListener("click",editPost)});
-//     editBtns.forEach((btn)=>{ btn.removeEventListener("click",warnEdit)});
+     const submitBtn = document.getElementById("submit-btn");
+     submitBtn.remove();
+     cancelBtn.parentElement.appendChild(updateBtn);
+     cancelBtn.addEventListener("click",cancelEdit) 
+     updateBtn.addEventListener("click",(e)=> checkForm(e,true,project))
+
+
+    // Can't use other delete and edit buttons while on editing mode 
+    const editBtns = document.querySelectorAll(".edit-btn");
+    editBtns.forEach((btn)=>{
+        btn.disabled = true
+    })
+    const deleteBtns = document.querySelectorAll(".delete-btn");
+    deleteBtns.forEach((btn)=>{
+        btn.disabled = true
+    })
+
+    alert(`On Editing Mode, all delete and edit project buttons are disabled! 
+    Please click update or cancel button to exit Editing Mode`)
+}
+             // when click cancel
+function cancelEdit(e){
+    e.preventDefault();
+   
+    // Remove cancel button and update btn
     
+       document.getElementById("update-btn").remove();
+       e.currentTarget.remove();
+
+    // Add submit button
+    const buttonGroup = document.querySelector(".form-btns");
+    const submitBtn = document.createElement("button");
+
+    submitBtn.innerHTML = "Submit"
+    submitBtn.id = "submit-btn";
+    buttonGroup.appendChild(submitBtn);
+    submitBtn.addEventListener("click",checkForm)
+
+    //  Give all edit and delete buttons back their power
+    const editBtns = document.querySelectorAll(".edit-btn");
+    editBtns.forEach((btn)=>{btn.disabled = false})
+    const deleteBtns = document.querySelectorAll(".delete-btn");
+    deleteBtns.forEach((btn)=>{btn.disabled = false})
     
+    // Default
+    clearInputs();
+    alert("Editing canceled")
     
-// }
+}
+              // after clicking update
+function updateForm(newProjectData,oldProject){
+    oldProject.querySelector(".project-img").src = newProjectData.image;
+    oldProject.querySelector(".project-title").innerHTML = newProjectData.name;
+    oldProject.querySelector(".project-duration").innerHTML = "durasi: " + getTime(newProjectData.start,newProjectData.end);
+    oldProject.querySelector(".project-des").innerHTML = newProjectData.desc;
+   !newProjectData.techs[0] && oldProject.querySelector(".fa-brands.fa-node-js") && oldProject.querySelector(".fa-brands.fa-node-js").remove();
+   !newProjectData.techs[1] && oldProject.querySelector(".fa-brands.fa-react") && oldProject.querySelector(".fa-brands.fa-react").remove();
+   !newProjectData.techs[2] && oldProject.querySelector(".next-js") && oldProject.querySelector(".next-js").remove();
+   !newProjectData.techs[3] && oldProject.querySelector(".ts") && oldProject.querySelector(".ts").remove();
 
-// function updateForm(newProjectData,oldProject){
-//     oldProject.querySelector(".project-img").src = newProjectData.image;
-//     oldProject.querySelector(".project-title").innerHTML = newProjectData.name;
-//     oldProject.querySelector(".project-duration").innerHTML = "durasi: " + getTime(newProjectData.start,newProjectData.end);
-//     oldProject.querySelector(".project-des").innerHTML = newProjectData.desc;
-//    !newProjectData.techs[0] && oldProject.querySelector(".fa-brands.fa-node-js").remove();
-//    !newProjectData.techs[1] && oldProject.querySelector(".fa-brands.fa-react").remove();
-//    !newProjectData.techs[2] && oldProject.querySelector(".next-js").remove();
-//    !newProjectData.techs[3] && oldProject.querySelector(".ts").remove();
+      // Remove cancel button and update btn
+    document.getElementById("update-btn").remove();
+    document.getElementById("cancel-btn").remove();
 
-//    alert("Old project updated");
+   // Add submit button
+   const buttonGroup = document.querySelector(".form-btns");
+   const submitBtn = document.createElement("button");
 
-//    submitBtn.replaceWith(submitBtn.cloneNode(true));
-//    submitBtn.addEventListener("click", checkForm);
-//    submitBtn.innerHTML = "submit";
+   submitBtn.innerHTML = "Submit"
+   submitBtn.id = "submit-btn";
+   buttonGroup.appendChild(submitBtn);
+   submitBtn.addEventListener("click",checkForm)
 
-// //    clear
-//    clearInputs()
-// }
+   //    Give all edit buttons back their power
+   const editBtns = document.querySelectorAll(".edit-btn");
+   editBtns.forEach((btn)=>{btn.disabled = false})
+
+   const deleteBtns = document.querySelectorAll(".delete-btn");
+   deleteBtns.forEach((btn)=>{btn.disabled = false})
+
+//    clear
+    alert("Old project updated");
+    clearInputs()
+}
 
 
+                                     // Helper functions
 
-// Helper functions
-
-
+            //    get calculations
 function getId (id){
     return document.getElementById(id)
 }
@@ -204,6 +251,7 @@ function getTime(start,end){
     return duration + " " + "bulan"
 }
 
+        //   checking calculations
 function isPostEmpty(){
     if(document.getElementsByClassName("project").length == 1 && document.getElementById("empty-project") !== null ){
         document.getElementById("empty-project").remove()
@@ -218,6 +266,37 @@ function isPostEmpty(){
     }
 }
 
+function validateDate(start,end){
+    // FORMAT yyyy/mm//dd
+
+    // start data
+    const startYear = Number(start.slice(0,4));
+    const startMonth = Number(start[5]) == 0 ? Number(start[6]) : Number(start[5] + start[6]);
+    const startDay = Number(start[8]) == 0 ? Number(start[9]) : Number(start[8] + start[9]);
+
+    // end data
+    const endYear = Number(end.slice(0,4));
+    const endMonth = Number(end[5]) == 0 ? Number(end[6]) : Number(end[5] + end[6]);
+    const endDay = Number(end[8]) == 0 ? Number(end[9]) : Number(end[8] + end[9]);
+
+    // logic 
+          // validate year
+    if(endYear < startYear ){
+        return false
+    }
+         // validate month
+    if(endMonth < startMonth && endYear == startYear ){
+        return false
+    }
+         // validate day
+    if( endDay < startDay && endMonth == startMonth && endYear == startYear){
+        return false
+    }
+     
+    return true;
+}
+
+        // action
 function clearInputs(){
      getId("project-input").value = "";
      getId("start-date-input").value = "";
@@ -230,18 +309,8 @@ function clearInputs(){
      getId("ts").checked = false;
     
 }
-
+        
 function movePost(){
     location.href = "http://localhost:5500/Chapter1-day4/single.html";
 }
 
-function warnEdit(e){
-    e.stopPropagation();
-
-    window.scrollTo({
-        left: 0,
-        top:0
-    });
-
-    alert("Already on editing mode, please cancel previous edit mode")
-}

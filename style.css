@@ -207,6 +207,12 @@ form button{
 #cancel-btn{
     color: white;
     background-color: red;
+    
+}
+
+#update-btn{
+    color: white;
+    background-color: #111727;
     margin-left: 16px;
 }
 
@@ -250,6 +256,8 @@ form button{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    margin-bottom: 32px;
 }
 
 .upper-project {
@@ -309,6 +317,7 @@ form button{
 }
 
 .project-buttons > button{
+   position: relative;
    flex: 1;
    background-color: #111727 ;
    font-weight: bold;
@@ -325,7 +334,37 @@ form button{
     margin-right: 4px;
  }
 
+.project-buttons > button:disabled{
+    background-color: rgba(123, 123, 123, 0.429);
+    cursor:not-allowed;
+}
 
+.project-buttons > button:disabled::after{
+    position: absolute;
+    content: "Both buttons are disabled, to enable it , cancel or update the project which is still on editing mode ( At the form on top of the page )";
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200%;
+
+    font-size: 10px;
+    color: white;
+    background-color: black;
+    text-align: start;
+    padding: 8px 8px;
+    border: 1px solid;
+    border-radius: .4rem;
+
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: 150ms ease;
+}
+
+.project-buttons > button:disabled:hover::after{
+    visibility: visible;
+    opacity: 1;
+}
 
 
  /* DETAILS SECTION */
