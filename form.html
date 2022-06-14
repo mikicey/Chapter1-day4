@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="form.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fill the form</title>
+</head>
+<body>
+
+        <!-- Header -->
+        <header>
+            <nav>
+                <div class="left-header">
+                     <img src="assets/logo.png">
+                     <a href="./index.html">Home</a>
+                     <a href="./project.html">My Project</a>
+                </div>
+  
+                 <a class="cta-btn" href="./form.html">Contact Me</a>
+            </nav>
+      </header>
+  
+
+     <!-- Body -->
+    <section>
+          <h1>GET IN TOUCH</h1>
+
+          
+          <form>
+               <div class="form-parts">
+                   <label for="name-input">Name</label>
+                   <input type="text" id="name-input" name="name">
+               </div>
+
+               <div class="form-parts">
+                   <label for="email-input">Email</label>
+                   <input type="email" id="email-input" name="email">
+              </div>
+
+              <div class="form-parts">
+                    <label for="phone-input">Phone Number</label>
+                    <input type="text" id="phone-input" name="number">
+              </div>
+
+              <div class="form-parts">
+                    <label for="subject-input">Subject</label>
+                    <select type="text" id="subject-input" name="subject">
+                                 <option value="Frontend">Frontend</option>
+                                 <option value="Backend">Backend</option>
+                                 <option value="Fullstack">Fullstack</option>
+                    </select>
+              </div>
+
+              <div class="form-parts">
+                <label for="message-input">Your Message</label>
+                <textarea name="" id="message-input" cols="30" rows="10"></textarea>
+              </div>
+
+              <button type="button" onclick="submitData()">Submit</button>
+
+          </form>
+
+    </section>
+    
+    <script src="form.js">
+            
+    </script>
+</body>
+</html>

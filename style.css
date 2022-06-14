@@ -2,37 +2,22 @@
     font-family: sans-serif;
     box-sizing: border-box;
     color: #303030;
-    margin: 0;
-}
-
-html{
-    scroll-behavior: smooth;
 }
 
 body{
     margin: 0;
     padding: 0;
     background-color: #E3E7EB ;
-    scroll-behavior: smooth;
 }
 
 section{
-    padding: 32px 64px;
+    padding: 64px 64px;
     margin: 0 auto;
+
     max-width: 1500px;
 }
 
-.projects-section{
-    position: relative;
-    background-color: #F4F3F3;
-    padding: 28px 128px 300px 128px;
-}
-
-.details-section{
-    padding: 64px;
-}
-     
-                     /* HEADER */
+                             /* Header */
 
 header{
     background-color: #F4F3F3 ;
@@ -51,7 +36,6 @@ nav{
 .left-header{
     display: flex;
     align-items: center;
-
 }  
 
 .left-header img{
@@ -59,8 +43,8 @@ nav{
 }
 
 .left-header a{
-    text-decoration: none;
     margin-left: 40px;
+    text-decoration: none;
 }
 
 .left-header .active{
@@ -69,6 +53,7 @@ nav{
 
 .cta-btn{
     text-decoration: none;
+
     border: none;
     border-radius: 8px;
 
@@ -78,361 +63,152 @@ nav{
 
     font-size: 16px;
     padding: 8px 16px;
-    cursor: pointer;
-}
-
-
-                        /* MAIN */
-
-/* Form section */
-h1{
-    text-align: center;
-    color: #111727;
-    font-weight: bold;
-}
-
-form{
-    margin: 48px auto;
-    width: 480px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-
-}
- 
-
-     /*  */
-.form-parts{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-
-    margin-bottom: 24px;
-    width: 100%;
-}
-
-.form-parts label{
-    margin-bottom: 12px;
-    color: #111727;
-    font-weight: bold
-}
-
-.form-parts input{
-    /* cursor: pointer; */
-    border: none;
-    padding: 8px 12px;
-
-    border-radius: 4px;
-    box-shadow: 0px 4px 8px #bebebe;
-    background-color: white;
-}
-
-.form-parts textarea{
-    
-    resize: none;
-    border: none;
-    padding: 12px 12px;
-    border-radius: 4px;
-    box-shadow: 0px 4px 8px #bebebe;
-}
-
-.form-parts img{
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    cursor: pointer;
-}
-
-/* techno Input */
-
-.form-parts > div{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-row-gap: 16px;
-}
-
-.form-parts > div > div{
-    display: flex;
-    align-items: flex-start
-}
-
-.form-parts > div label{
-    color: gray;
-    margin-left: 16px;
-}
-
-.form-parts > span {
-    font-weight: bold;
-    margin-bottom: 12px;
-    color: #111727;
-}
-
-/* date input */
-.date-input{
-        display: flex;
-        width: 100%;
-    }
-    
-.date-input .form-parts:first-child{
-        margin-right: 12px;
-    }
-
-.form-parts.date input{
-    cursor: pointer;
-}
-
-
-form button{
-    border: none;
-    border-radius: 16px;
 
     cursor: pointer;
-    font-weight: bold;
-
-    margin-top: 32px;
-    padding: 8px 32px;
-}
-
-.form-btns{
-    display: flex;
-
-}
-
-#submit-btn{
-    color: white;
-    background-color: #111727;
-}
-
-#cancel-btn{
-    color: white;
-    background-color: red;
-    
-}
-
-#update-btn{
-    color: white;
-    background-color: #111727;
-    margin-left: 16px;
 }
 
 
 
+                               /* Body */
 
-
-
-
-
-/* PROJECTS SECTION */
-
-.projects{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    margin-top: 64px;
-    margin-bottom: 100px;
-
-}
-
-#empty-project{
-    white-space: nowrap;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,50%);
-    font-weight: bold;
-}
-
-/* Project card */
-.project {
-    
-    cursor: pointer;
-    box-shadow: 0px 0px 6px rgb(188, 188, 188);
-    border-radius: 12px;
-    padding: 16px;
-    margin: 0 16px;
-
-    text-decoration: none;
+          /* left side */
+.intro{
+    border-radius: 8px;
 
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    max-width: 1600px;
 
-    margin-bottom: 32px;
+    margin: 0 auto;
+    padding: 48px;
+
+    background-color: #FEFEFE;
+    box-shadow: 0px 0px 64px rgb(215, 215, 215);
 }
 
-.upper-project {
-    display: flex;
-    flex-direction: column;
-}
-
-.lower-project{
-    display: flex;
-    flex-direction: column;
-}
-
-.project .upper-project > img{
-    border-radius: 12px;
-    height: 300px;
-    object-fit: cover;
-    object-position: top;
-
-    margin-bottom: 8px;
-}
-
-.project .upper-project > span { /*  title */
-    font-weight: bold;
-    color: #111727 ;
-    
-}
-
-.project-duration{
-    font-weight: bold;
-    font-size: 12px;
-    margin: 6px 0 24px 0;
-}
-
-.project-des{
-    font-size: 14px;
-    word-break: break-all;
-}
-
-.project-logos{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin: 24px 0;
-}
-
-.project-logos i{
-    margin-right: 16px;
-    font-size: 24px;
-}
-
-.project-logos img{
-    margin-right: 16px;
-}
-
-.project-buttons{
- display: flex;
-}
-
-.project-buttons > button{
-   position: relative;
-   flex: 1;
-   background-color: #111727 ;
-   font-weight: bold;
-   color: white;
-   appearance: none;
-   border:none;
-   border-radius: 8px;
-   padding: 4px 8px;
-
-   cursor: pointer;
-}
-
-.project-buttons > button:first-child{
-    margin-right: 4px;
- }
-
-.project-buttons > button:disabled{
-    background-color: rgba(123, 123, 123, 0.429);
-    cursor:not-allowed;
-}
-
-.project-buttons > button:disabled::after{
-    position: absolute;
-    content: "Both buttons are disabled, to enable it , cancel or update the project which is still on editing mode ( At the form on top of the page )";
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200%;
-
-    font-size: 10px;
-    color: white;
-    background-color: black;
-    text-align: start;
-    padding: 8px 8px;
-    border: 1px solid;
-    border-radius: .4rem;
-
-    overflow: hidden;
-    opacity: 0;
-    visibility: hidden;
-    transition: 150ms ease;
-}
-
-.project-buttons > button:disabled:hover::after{
-    visibility: visible;
-    opacity: 1;
-}
-
-
- /* DETAILS SECTION */
-
-               /* upper */
-.details-section .upper{
-    margin-top: 48px;
-    display: flex;
-    align-items: flex-start;
-}
-
-.details-section .upper img{
-    margin-right: 32px;
-    height: 500px;
-    object-fit: cover;
-    object-position: center;
-
+.intro-main{
     flex: 2;
+    margin-right: 48px;
 }
 
-.details-section .upper .upper-info{
-    flex: 1;
+/* TITLE AND DES  */
+.intro__title{
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 0px;
+}
+
+
+.intro__des{
+    margin: 32px 0px;
+    font-size: 18px;
+}
+
+
+/* BTN GROUP */
+
+.btn-group{
+    margin: 32px 0;
+}
+
+.contact-btn{
+
+    cursor: pointer;
+   display: inline-block;
+   text-decoration: none;
+
+   color: white;
+   background-color: #111727;
+
+   font-size: 18px;
+   font-weight: bold;
+
+   border-radius:32px; 
+   padding: 16px 32px;
+   margin-right: 32px;
+}
+
+
+.download-btn{
+      
+      cursor: pointer;
+
+      display: inline-flex;
+      align-items: center;
+
+      font-size: 18px;
+      color: black;
+      
+}
+
+.download-btn img {
+    margin-left: 6px;
+}
+
+
+/* SOCIALS */
+
+.intro__socials{
+    margin: 0 auto;
+    margin-bottom: 48px;
+
     display: flex;
-    flex-direction: column;
     justify-content: flex-start;
-}
-
-.details-section .upper .upper-info b{
-    margin-bottom: 16px;
-}
-
-.details-section .upper .upper-info b:last-child{
-    margin: 100px 0;
-}
-
-.details-section .upper .upper-info span{
-    margin-bottom: 8px;
-    font-size: 14px;
-    display: inline-flex;
     align-items: center;
 }
 
-.details-section .upper .upper-info span i{
-    font-size: 18px;
-    margin-right: 8px;
-}
+.intro__socials a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-.details-section .upper .upper-info > div{
+    width: 32px;
+    height: 32px;
+    padding: 4px 4px;
+    margin: 0 8px;
 
-    width: 100px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    border-radius: 50vh;
+    background-color: black;
     
+    text-decoration: none;
 }
 
-.details-section .upper .upper-info > div > span{
-    margin-right: 12px;
-    margin-bottom: 12px;
-    
+.fa-brands{
+     color: white;
 }
 
-.details-section .upper .upper-info .tech{
+
+        /* right side */
+
+/*  CARD  */
+.intro-card{
+    overflow: hidden;
+    box-shadow: 0px 0px 64px rgb(215, 215, 215);
+
+    width: 400px;
+    display: inline-flex;
+    flex-direction: column;
+
+    margin: 0 auto;
+    border-radius: 12px;
+}
+
+.intro-card img{
+     width: 100%;
+     height: 400px;
+     object-fit: cover;
+}
+
+.intro-card strong{
     margin-top: 18px;
-}
- 
-                     /* lower */
 
-.details-section .lower{
-    margin-top: 64px;
-    /* max-width: 64ch; */
+    font-size: 28px;
+    text-align: center;
+}
+
+.intro-card p {
+    font-size: 20px;
+    text-align: center;
+    
+    margin-top: 4px;
+    margin-bottom: 18px;
 }

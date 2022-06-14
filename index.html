@@ -1,7 +1,7 @@
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
@@ -10,83 +10,88 @@
     <title>Home Page</title>
 </head>
 <body>
-
-     <!-- Header -->
-     <header>
-        <nav>
-            <div class="left-header">
-                 <img src="assets/logo.png">
-                 <a href="./index.html">Home</a>
-                 <a href="#" class="active">My Project</a>
-            </div>
-
-            <a class="cta-btn">
-                Contact Me
-            </a>
-        </nav>
-     </header>
-
-     <!-- Body -->
-    <section>
-          <h1>GET IN TOUCH</h1>
-
-          <form >
-               <div class="form-parts">
-                   <label for="project-input">Project Name</label>
-                   <input type="text" id="project-input" name="project">
-               </div>
-
-               <div class="date-input">
-                      <div class="form-parts">
-                          <label for="start-date-input">Start Date</label>
-                          <input type="date" id="start-date-input" name="start-date">
-                      </div>
-
-                      <div class="form-parts">
-                           <label for="end-date-input">End Date</label>
-                           <input type="date" id="end-date-input" name="end-date" >
-                     </div>
-               </div>
-
-              <div class="form-parts">
-                <label for="description-input">Description</label>
-                <textarea name="" id="description-input" cols="30" rows="10"></textarea>
-              </div>
-
-              <div class="form-parts">
-                  <span class="">Technologies</span>
-                  <div class="">
-                       <div><input type="checkbox" id="node"><label for="node">Node Js</label></div>
-                       <div><input type="checkbox" id="next"><label for="next">Next Js</label></div>
-                       <div><input type="checkbox" id="react"><label for="react">React Js</label></div>
-                       <div><input type="checkbox" id="ts"><label for="ts">TypeScript</label></div>
-                  </div>
-              </div>
-
-              <div class="form-parts date">
-                  <label for="file-input">Upload Image</label>
-                  <input type="file" id="file-input" >
-                  <img src="./assets/file.png" width="24px">
-              </div>
-
-              <div class="form-btns">
-                  <button id="submit-btn">Submit</button>
-              </div>
-
-          </form>
-
-    </section>
     
-    <section class="projects-section">
-           <h1>MY PROJECT</h1>
-           <div class="projects" id="project-list" >
-               <p id="empty-project"> No posts, please add new post... </p>
-               <!-- dynamic data -->
-           </div>
+    <!-- Header -->
+    <header>
+          <nav>
+              <div class="left-header">
+                   <img src="assets/logo.png">
+                   <a href="./index.html" class="active">Home</a>
+                   <a href="./project.html">My Project</a>
+              </div>
+
+               <a class="cta-btn" href="./form.html">Contact Me</a>
+          </nav>
+    </header>
+
+    <!-- Body -->
+    <section>
+
+          <!-- Main Area (Kotak putih) -->
+            <div class="intro">
+
+                <!-- Main -->
+                  <div class="intro-main">
+
+                          <h1 class="intro__title">Hi! Welcome to My Hut!</h1>
+
+                          <p class="intro__des">Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+                              Dolorum accusantium aliquam quod nemo eveniet alias, quos
+                               asperiores, nihil saepe facilis voluptate adipisci 
+                               possimus distinctio reiciendis officiis consequatur 
+                               optio ut repellendus! Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+                                Dolorum accusantium aliquam quod nemo eveniet alias, quos
+                               asperiores, nihil saepe facilis voluptate adipisci 
+                                possimus distinctio reiciendis officiis consequatur 
+                               optio ut repellendus! Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+                               Dolorum accusantium aliquam quod nemo eveniet alias, quos
+                              asperiores, nihil saepe facilis voluptate adipisci 
+                              possimus distinctio reiciendis officiis consequatur  optio ut repellendus!</p>
+      
+
+            <div class="btn-group">
+                    <a  href="./form.html" class="contact-btn">
+                    Contact 
+                    </a>
+      
+                   <div class="download-btn">
+                    download CV <img src="./assets/downloads.png">
+                   </div>
+            </div>
+      
+            <!-- Social -->
+            <div class="intro__socials">
+      
+             <a href="https://www.linkedin.com/in/darren-christian-t-8b59b9224">
+                <i  class="fa-brands fa-linkedin-in"></i>
+             </a>
+             <a href="https://instagram.com/selftaught_tj?igshid=YmMyMTA2M2Y=">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+             <a href="https://www.facebook.com/profile.php?id=100080178886723">
+                <i class="fa-brands fa-facebook-f"></i>
+             </a>
+             <a href="https://www.twitter.com/DarrenC43892953">
+                <i class="fa-brands fa-twitter"></i>
+             </a>
+                
+              
+            </div>
+      
+
+
+                   </div>
+       
+                 <!-- Card -->
+                  <div class="intro-card">
+          <img src="assets/pexels-pixabay-220453.jpg" alt="My face">
+          <strong>Darren Christian</strong>
+          <p>Fullstack Developer</p>
+                  </div>
+
+             </div>
+
     </section>
 
-    <script src="./index.js"></script>
+
 </body>
-</html>
-</body>
-</html>

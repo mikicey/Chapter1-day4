@@ -48,24 +48,24 @@ function submitForm(project){
 
     newProject.innerHTML = `
     
-    <div class="upper-project">
+    <div class="upper-project" >
         <img class="project-img" src=${project.image} width="100%" alt="">
         <span class="project-title">${project.name}</span>
         <p class="project-duration">Durasi: ${getTime(project.start,project.end)}</p>
         <p class="project-des">${project.desc}</p>
     </div>
 
-    <div class="lower-project">
-        <div class="project-logos">
+    <div class="lower-project" >
+        <div class="project-logos" >
              ${project.techs[0] ? `<i class="fa-brands fa-node-js"></i>` : ""}
              ${project.techs[2] ? `<i class="fa-brands fa-react"></i>` : ""}
              ${project.techs[1] ? `<img class="next-js" src="./assets/nextjs.webp" width="40px">` : ""}
              ${project.techs[3] ? ` <img  class="ts" src="./assets/typescript_original_logo_icon_146317.png" width="24px" >` : ""}
         </div>
      
-        <div class="project-buttons">
+        <div class="project-buttons" >
              <button class="edit-btn">Edit</button>
-             <button class="delete-btn" >Delete</button>
+             <button class="delete-btn">Delete</button>
         </div>
     </div>
     
@@ -74,6 +74,7 @@ function submitForm(project){
 
     // ADD LISTENERS
     newProject.addEventListener("click", movePost)
+
 
     const deleteBtn = newProject.querySelector(".delete-btn");
     deleteBtn.addEventListener("click", deletePost);
@@ -219,7 +220,6 @@ function updateForm(newProjectData,oldProject){
     clearInputs()
 }
 
-
                                      // Helper functions
 
             //    get calculations
@@ -229,6 +229,7 @@ function getId (id){
 
 function getTime(start,end){
     
+    // YYYY/MM/DD
 
     // year
     const startYear = Number(start.slice(0,4));
@@ -248,7 +249,7 @@ function getTime(start,end){
     const duration = endMonth - startMonth + yearDuration;
     
     if(duration === 0) return "Dibawah sebulan"
-    return duration + " " + "bulan"
+    return duration + " " + "bulan" 
 }
 
         //   checking calculations
@@ -267,7 +268,7 @@ function isPostEmpty(){
 }
 
 function validateDate(start,end){
-    // FORMAT yyyy/mm//dd
+    // FORMAT yyyy/mm/dd  
 
     // start data
     const startYear = Number(start.slice(0,4));
@@ -311,6 +312,7 @@ function clearInputs(){
 }
         
 function movePost(){
-    location.href = "http://localhost:5500/Chapter1-day4/single.html";
+    window.location.href = "https://www.chapter1-day4.vercel.app/single.html";
 }
+
 

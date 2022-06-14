@@ -1,0 +1,92 @@
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="project.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+
+     <!-- Header -->
+     <header>
+        <nav>
+            <div class="left-header">
+                 <img src="assets/logo.png">
+                 <a href="./index.html">Home</a>
+                 <a href="./project.html" class="active">My Project</a>
+            </div>
+
+            <a class="cta-btn" href="./form.html">
+                Contact Me
+            </a>
+        </nav>
+     </header>
+
+     <!-- Body -->
+    <section>
+          <h1>ADD MY PROJECT</h1>
+
+          <form >
+               <div class="form-parts">
+                   <label for="project-input">Project Name</label>
+                   <input type="text" id="project-input" name="project">
+               </div>
+
+               <div class="date-input">
+                      <div class="form-parts">
+                          <label for="start-date-input">Start Date</label>
+                          <input type="date" id="start-date-input" name="start-date">
+                      </div>
+
+                      <div class="form-parts">
+                           <label for="end-date-input">End Date</label>
+                           <input type="date" id="end-date-input" name="end-date" >
+                     </div>
+               </div>
+
+              <div class="form-parts">
+                <label for="description-input">Description</label>
+                <textarea name="" id="description-input" cols="30" rows="10"></textarea>
+              </div>
+
+              <div class="form-parts">
+                  <span class="">Technologies</span>
+                  <div class="">
+                       <div><input type="checkbox" id="node"><label for="node">Node Js</label></div>
+                       <div><input type="checkbox" id="next"><label for="next">Next Js</label></div>
+                       <div><input type="checkbox" id="react"><label for="react">React Js</label></div>
+                       <div><input type="checkbox" id="ts"><label for="ts">TypeScript</label></div>
+                  </div>
+              </div>
+
+              <div class="form-parts date">
+                  <label for="file-input">Upload Image</label>
+                  <input type="file" id="file-input" >
+                  <img src="./assets/file.png" width="24px">
+              </div>
+
+              <div class="form-btns">
+                  <button id="submit-btn">Submit</button>
+              </div>
+
+          </form>
+
+    </section>
+    
+    <section class="projects-section">
+           <h1>MY PROJECT</h1>
+           <div class="projects" id="project-list" >
+               <p id="empty-project"> No posts, please add new post... </p>
+               <!-- dynamic data -->
+           </div>
+    </section>
+
+    <script src="./index.js"></script>
+</body>
+</html>
+</body>
+</html>
