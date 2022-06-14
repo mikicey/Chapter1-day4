@@ -312,7 +312,7 @@ function clearInputs(){
 }
         
 function movePost(){
-    window.location.href = "https://www.chapter1-day4.vercel.app/single.html";
+    window.location.href = "http://www.chapter1-day4.vercel.app/single.html";
 }
 
 
